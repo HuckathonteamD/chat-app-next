@@ -1,0 +1,34 @@
+{% extends 'registration/base.html' %}
+{% block title %}
+  <title>google-login</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/google-login.css')}}" />
+  <!-- fontリンク -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Kiwi+Maru&family=RocknRoll+One&display=swap" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<body background="../../static/img/google-login-haikei.png">
+  <h1 class="h1">実装中</h1>
+  <div class="three-dot-spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+  <div id="google-login-box">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <div class="login-sign-up">
+      <div class="login">ログインへいく→<a class="login-url" href="{{ url_for('login') }}">Login!</a></div>
+      <div class="sign-up">サインアップへいく→<a class="sign-up-url" href="{{ url_for('signup') }}">SIGN UP!</a></div>
+    </div>
+  </div>
+</body>
+{% endblock %}

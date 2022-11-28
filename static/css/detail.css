@@ -1,0 +1,328 @@
+/* チャットルームの吹き出し・投稿時間
+リアクション・吹き出し内のボタンCSS */
+
+/* メッセ―ジがない時の表示 */
+.noMessages {
+  position: relative;
+  text-align: center;
+  color:black;
+  font-size: 20px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-weight: 700;
+  cursor: default;
+}
+
+/* 自分のメッセージ-投稿時間と編集時間-横並び指定 */
+.my-message-updatetime {
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  margin-top: 30px;
+  margin-bottom: -10px;
+  margin-right: 5%;
+  text-align:right;
+  color:black;
+  font-size: 16px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-weight: 400;
+  cursor: default;
+} 
+/* 自分のメッセージ-投稿時間 */
+.message-updatetime-right{
+  position: relative;
+  width: 110px;
+}
+/* 自分のメッセージ-編集時間 */
+.message-updatetime-right-edit {
+  position: relative;
+  width: 200px;
+}
+
+
+/* 他人のメッセージ-投稿者名前 */
+.user-name {
+  position: relative;
+  top: 50px;
+  color:black;
+  font-size: 16px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  cursor: default;
+}
+/* 他人のメッセージ-投稿時間と編集時間-横並び指定 */
+.other-message-updatetime {
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  height: 50px;
+  margin-top: 30px;
+  margin-bottom: -10px;
+  margin-left: 5%;
+  text-align:right;
+  color:black;
+  font-size: 16px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-weight: 400;
+  cursor: default;
+} 
+/* 他人のメッセージ-投稿時間 */
+.message-updatetime-left {
+  position: relative;
+  width: 110px;
+  cursor: default;
+}
+/* 他人のメッセージ-編集時間 */
+.message-updatetime-left-edit {
+  position: relative;
+  width: 200px;
+  cursor: default;
+}
+
+
+/* 他人の投稿に付くユーザー名指定 */
+.user-name{
+    padding: 0;
+    margin: 10px 0px 0px 0px; 
+}
+
+/* 左吹き出しの指定 */
+.box-left {
+  position:relative;
+  margin: 0;
+  width: 500px;
+  left: 5%;
+  background: linear-gradient(99.05deg, #DEF7FF 1.44%, #EAD9FF 102.74%);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  padding:20px;
+  text-align:left;
+  color:black;
+  font-size: 16px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.75;
+  word-break: break-all;
+  border-radius:15px;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  cursor: default;
+}
+/* 吹き出し三角部分の指定 */
+.box-left:after {
+  border: solid transparent;
+  content:'';
+  height:0;
+  width:0;
+  pointer-events:none;
+  position:absolute;
+  border-color: rgba(90, 230, 40, 0);
+  border-top-width:10px;
+  border-bottom-width:10px;
+  border-left-width:30px;
+  border-right-width:30px;
+  margin-top: -10px;
+  border-right-color:#DFF5FF;
+  right:100%;
+  top:50%;
+}
+
+/* 右吹き出しの指定 */
+.box-right{
+  position:relative;
+  width:500px;
+  left: 95%;    /*右寄せの設定１*/
+  transform: translateX(-100%);    /*右寄せの設定２*/
+  margin: 0;
+  background: linear-gradient(91.89deg, #FFEBEB -1.59%, #FFD8FB 106.35%);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  padding:20px;
+  text-align:left;
+  color:black;
+  font-size: 16px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.75;
+  word-break: break-all;
+  border-radius:15px;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  cursor: default;
+  /* border: #00FFA3 solid; */
+}
+/* 吹き出し三角部分の指定 */
+.box-right:after{
+  border: solid transparent;
+  content:'';
+  height:0;
+  width:0;
+  pointer-events:none;
+  position:absolute;
+  border-color: rgba(90, 230, 40, 0);
+  border-top-width:10px;
+  border-bottom-width:10px;
+  border-left-width:30px;
+  border-right-width:30px;
+  margin-top: -10px;
+  border-left-color:#FFD9FA;
+  left:100%;
+  top:50%;
+}
+
+
+/* 自分が付けたリアクションの囲み罫指定-緑 */
+.my-reaction-circle {
+  width: 46px;
+  height: 40px;
+  margin: 2.5px;
+  display: inline-block;
+  background: #C1FFF0;
+  border: 2px solid #00FFA3;
+  border-radius: 20px;
+}
+/* 自分が付けたのリアクション画像の指定 */
+.my-reaction-img{
+  position: relative;
+  width: 28px;
+  height:28px;
+  margin-left: 7px;
+  margin-top: 4px;
+  
+}
+
+
+/* 他人が付けたリアクション囲み罫指定-グレー */
+.reaction-circle {
+  width: 46px;
+  height: 40px;
+  margin: 2.5px;
+  display: inline-block;
+  background: #EDEEEF;
+  border: 2px solid #828282;
+  border-radius: 20px;
+}
+/* 他人が付けたリアクションの画像指定 */
+.reaction-img{
+  position: relative;
+  width: 28px;
+  height:28px;
+  margin-left: 7px;
+  margin-top: 4px;
+}
+
+
+/* リアクションボタンの指定 */
+.reaction-btn {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  left: 90%;
+  margin-top: 15px;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.reaction-btn img {
+position: absolute;
+top: 0px;
+left: 0px;
+display: block;
+transition: all 0.25s;
+}
+.reaction-btn:hover img:nth-of-type(2){
+opacity: 0;
+}
+
+/* メッセージ編集ボタンの指定 */
+.update-message-btn {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  left: 77%;
+  margin-top: 15px;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+/* 2つのボタン画像を重ねてhover -メッセージ編集ボタン*/
+.update-message-btn img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  transition: all 0.25s;
+}
+.update-message-btn:hover img:nth-of-type(2){
+opacity: 0;
+}
+
+/* メッセージ削除ボタンの指定 */
+.delete-message-btn {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  left: 79%;
+  margin-top: 15px;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+/* 2つのボタン画像を重ねてhover-メッセージ削除ボタン- */
+.delete-message-btn img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  transition: all 0.25s;
+}
+.delete-message-btn:hover img:nth-of-type(2){
+opacity: 0;
+}
+
+
+/* ユーザーアイコン指定 */
+/* 自分のアイコン指定 */
+.my-icon img{
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  top: 150px;
+  left: 100%;    /*右寄せの設定１*/
+  transform: translateX(-100%);    /*右寄せの設定２*/
+  top: auto;
+}
+
+/* 他人のアイコン指定 */
+.other-icon img{
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  top: 150px;
+  top: auto;
+}
+
+.flashes {
+  position: relative;
+  z-index: 10;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  color: red;
+}
+
+
+/* テキスト入力エリア */
+/* .typing-box textarea {
+    width:400px;
+} */
