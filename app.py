@@ -41,11 +41,11 @@ def userSignup():
         password = hashlib.sha256(password1.encode('utf-8')).hexdigest()
         user = User(uid, name, email, password)
         DBuser = dbConnect.getUser(email)
-        DBusername = dbConnect.getUserName(name)
+        DBusername = dbConnect.getUserNamebyName(name)
         current_date = datetime.now(timezone(timedelta(hours=9)))
         uiid = random.randrange(2,11)
 
-        if DBuser != None or DBusername != None:
+        if DBuser or DBusername:
             flash('既に登録されているようです')
         else:
             dbConnect.createUser(user, uiid, current_date)
@@ -187,6 +187,7 @@ def add_message():
         return redirect(url_for('detail',cid=cid))
     if message and request.method == 'POST':
         dbConnect.createMessage(uid, cid, message, current_date)
+        dbConnect.updateChannel_updatedat(current_date, cid)
 
     return redirect(url_for('detail',cid=cid))
 
@@ -220,6 +221,7 @@ def update_message():
     message_uid = dbConnect.getUserIdByMessageId(mid)
     if message_uid["uid"] == uid and message and request.method == 'POST':
         dbConnect.updateMessage(uid, cid, message, current_date, mid)
+        dbConnect.updateChannel_updatedat(current_date, cid)
 
     return redirect(url_for('detail',cid=cid))
 
