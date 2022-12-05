@@ -96,7 +96,6 @@ const pagination = () => {
           unfollowImg.setAttribute("src",`${location.origin}/static/img/channelPic-heart.png`);
           unfollowChannelBtn.appendChild(unfollowImg);
           li.appendChild(unfollowChannelBtn);
-
           unfollowChannelBtn.addEventListener("click", () => {
             modalOpen("unfollow_i");
             const confirmationButtonLink = document.getElementById(
