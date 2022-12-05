@@ -31,7 +31,7 @@ class dbConnect:
             cur.close
 
 
-    def getUserName(user_name):
+    def getUserNamebyName(user_name):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
@@ -50,7 +50,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM channels;"
+            sql = "SELECT * FROM channels ORDER BY updated_at DESC;"
             cur.execute(sql)
             channels = cur.fetchall()
             return channels
@@ -111,6 +111,20 @@ class dbConnect:
             cur = conn.cursor()
             sql = "DELETE FROM channels WHERE id=%s;"
             cur.execute(sql, (cid))
+            conn.commit()
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close()
+
+
+    def updateChannel_updatedat(date, cid):
+        try: 
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE channels SET updated_at=%s WHERE id=%s;"
+            cur.execute(sql, (date, cid))
             conn.commit()
         except Exception as e:
             print(e + 'が発生しています')
