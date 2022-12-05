@@ -161,11 +161,13 @@ nav ul li {
     column-gap: 30%;
 }
 
+/* フォローチャンネルボタン ハートマーク線　フォローしますか？*/
 .follow-channel-btn-i {
     border: none;
     background: transparent;
     cursor: pointer;
 }
+/* フォロー解除ボタン　ハートマーク塗り　フォロー解除しますか？ */
 .unfollow-channel-btn-i {
     border: none;
     background: transparent;
