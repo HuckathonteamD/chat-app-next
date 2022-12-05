@@ -63,25 +63,11 @@ const pagination = () => {
       div.appendChild(p);
       li.appendChild(div);
 
-      var follow_judge = 0;
+      // フォローしているチャンネルがない場合、follow_judgeは0のまま
+      let follow_judge = 0;
 
-      // フォローしているチャンネルがない場合、フォローボタンを表示
-      if (follow_channels[0] == null) {
-        const followChannelBtn = document.createElement("button");
-          followChannelBtn.classList.add("follow-channel-btn-i")
-          followImg.setAttribute("src",`${location.origin}/static/img/channelPic-heartLine.png`);
-          followChannelBtn.appendChild(followImg);
-          li.appendChild(followChannelBtn);
-
-          followChannelBtn.addEventListener("click", () => {
-            modalOpen("follow_i");
-            const confirmationButtonLink = document.getElementById(
-              "follow-confirm-link-i"
-            );
-            const url = `/follow_channel_i/${item.id}`;
-            confirmationButtonLink.setAttribute("href", url);
-          });
-      } else {
+      // フォローしているチャンネルがある場合、follow_judgeを算出する
+      if (follow_channels[0] !== null) {
         for (let i=0; i < follow_channels.length; i++){
           if (item.id === follow_channels[i].cid) {
             follow_judge += 1;
@@ -89,6 +75,7 @@ const pagination = () => {
             follow_judge += 0;
           }
         }
+      }
         // フォローしているチャンネルには、フォロー解除ボタンを表示
         if (follow_judge === 1) {
           const unfollowChannelBtn = document.createElement("button");
@@ -122,8 +109,6 @@ const pagination = () => {
             confirmationButtonLink.setAttribute("href", url);
           });
         }
-      }
-
 
       // もしチャンネル作成者uidとuidが同じだったら、削除ボタンを追加
       if (uid === item.uid) {
