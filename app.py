@@ -144,11 +144,12 @@ def detail(cid):
         return redirect('/login')
     channel = dbConnect.getChannelById(cid)
     messages = dbConnect.getMessageAll(cid)
-    # follows = dbConnect.getFollowById(cid) 
     reactions = dbConnect.getReactionAll()
     messages_reaction = dbConnect.getMessageReactionAll(cid)
+    numberOfFollowersDict = dbConnect.getNumberOfFollowers(cid)
+    numberOfFollowers = numberOfFollowersDict['COUNT(uid)']
     followers = dbConnect.getFollowerByCid(cid)
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid, reactions=reactions, messages_reaction=messages_reaction, followers=followers)
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid, reactions=reactions, messages_reaction=messages_reaction, followers=followers, numberOfFollowers=numberOfFollowers)
 
 
 @app.route('/update_channel', methods=['POST'])
@@ -393,7 +394,7 @@ def add_message_reaction():
     mrid = request.form.get('reaction_id')
     current_date = datetime.now(timezone(timedelta(hours=9)))
 
-    if dbConnect.serchReaction(mid, uid, mrid):
+    if dbConnect.searchReaction(mid, uid, mrid):
         return redirect(url_for('detail',cid=cid))
     elif int(mrid)<1 or 13<int(mrid):
         return redirect(url_for('detail',cid=cid))
