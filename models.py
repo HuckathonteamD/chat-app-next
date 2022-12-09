@@ -219,6 +219,20 @@ class dbConnect:
         finally:
             cur.close()
 
+    def getNumberOfFollowers(cid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT COUNT(uid) FROM user_follow_channel WHERE cid=%s;"
+            cur.execute(sql, cid)
+            numberOfFollows = cur.fetchone()
+            return numberOfFollows
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close()
+
 
     def getFollowById(cid):
         try:
@@ -499,7 +513,7 @@ class dbConnect:
             cur.close()
 
 
-    def serchReaction(mid, uid, mrid):
+    def searchReaction(mid, uid, mrid):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()

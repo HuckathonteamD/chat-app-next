@@ -60,7 +60,10 @@
       {% endif %}
       <!-- チャンネルメンバー表示 -->
         <div class="Member">
-          <h2>Follower</h2>
+          <div class="followers">
+            <h2>Follower</h2>
+            <h4>{{numberOfFollowers}}</h4>
+          </div>
             <ul class="member-scroll">
               {% for user in followers %}
                 <ul>

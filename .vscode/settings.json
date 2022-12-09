@@ -4,7 +4,10 @@
         "mypage",
         "followbool",
         "unfollow",
-        "sikaku"
+        "sikaku",
+        "updatedat",
+        "mrid",
+        "uiid"
     ],
     "liveServer.settings.port": 5502
 }
