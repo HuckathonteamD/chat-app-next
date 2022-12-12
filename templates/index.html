@@ -24,40 +24,39 @@
     </nav>
   </header>
 
-  <div class="main-container channelpage">
-    <div class="bg-img"></div>
+  <div class="main-container-channelpage">
+    <!-- <div class="bg-img"></div> -->
     <div class="main-content">
-      <div class="Home">
-        <p>HOME</p>
-      </div>
-      <div class="channel">
-        <p>チャンネル一覧</p>
-      </div>
       <div class="home-icon">
         <img src="../static/img/Home.png">
+        <p class="Home">HOME</p>
+        <p class="channel">チャンネル一覧</p>
       </div>
-
-      <div class="channel-title">
-        <!-- ボタンが押されたら、JS起動 -->
-        <button id="add-channel-btn"></button>
-      </div>
+        
+      <!-- ボタンが押されたら、JS起動 -->
+      <button id="add-channel-btn"></button>
+    </div>
+    <!-- モーダル表示 -->
+    {% include 'modal/add-channel.html' %}
+    {% include 'modal/delete-channel.html' %}
+    {% include 'modal/logout.html' %}
+    {% include 'modal/follow-channel-i.html' %}
+    {% include 'modal/unfollow-channel-i.html' %}
+    <!-- チャンネル一覧の表示 -->
+    <div class="channel-title">
       <div class="channels-box">
-        <div>
-          <ul class="channel-box" style="list-style:none"></ul>
-        </div>
-        <div class="pagination-container">
-          <p id="prev"></p>
-          <ul class="pagination" style="list-style:none"></ul>
-          <p id="next"></p>
-        </div>
+        <ul class="channel-box" style="list-style:none"></ul>
       </div>
-      {% include 'modal/add-channel.html' %}
-      {% include 'modal/delete-channel.html' %}
-      {% include 'modal/logout.html' %}
-      {% include 'modal/follow-channel-i.html' %}
-      {% include 'modal/unfollow-channel-i.html' %}
+    </div>
+    <!-- ページネーションの表示 -->
+    <div class="pagination-container">
+      <p id="prev"></p>
+      <ul class="pagination" style="list-style:none"></ul>
+      <p id="next"></p>
     </div>
   </div>
+
+  
 </body>
 {% endblock %}
 {% block script %}

@@ -46,7 +46,7 @@ const pagination = () => {
       const followBtn = document.createElement("button");
       const followImg = document.createElement("img");
       const unfollowImg = document.createElement("img");
-
+      const span = document.createElement("span");
       // const br =document.createElement("br");
 
       // チャット画面へのリンク追加
@@ -82,7 +82,9 @@ const pagination = () => {
           unfollowChannelBtn.classList.add("unfollow-channel-btn-i")
           unfollowImg.setAttribute("src",`${location.origin}/static/img/channelPic-heart.png`);
           unfollowChannelBtn.appendChild(unfollowImg);
+          span.innerText = "クリックすると\nフォローを解除";
           li.appendChild(unfollowChannelBtn);
+          unfollowChannelBtn.appendChild(span);
           unfollowChannelBtn.addEventListener("click", () => {
             modalOpen("unfollow_i");
             const confirmationButtonLink = document.getElementById(
@@ -96,9 +98,10 @@ const pagination = () => {
           const followChannelBtn = document.createElement("button");
           followChannelBtn.classList.add("follow-channel-btn-i")
           followImg.setAttribute("src",`${location.origin}/static/img/channelPic-heartLine.png`);
+          span.innerText = "クリックすると\nフォローできます";
           followChannelBtn.appendChild(followImg);
+          followChannelBtn.appendChild(span);
           li.appendChild(followChannelBtn);
-
           followChannelBtn.addEventListener("click", () => {
             modalOpen("follow_i");
             const confirmationButtonLink = document.getElementById(
