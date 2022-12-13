@@ -245,6 +245,7 @@
   <script type="text/javascript">
     const channel = JSON.parse('{{ channel|tojson }}');
     const uid = JSON.parse('{{ uid|tojson }}');
+    const messages = JSON.parse('{{ messages|tojson }}');
   </script>
   <script
     src="{{url_for('static',filename='js/detail-modal.js')}}"
@@ -252,6 +253,10 @@
   ></script>
   <script
     src="{{url_for('static',filename='js/scroll-message.js')}}"
+    type="text/javascript"
+  ></script>
+  <script
+    src="{{url_for('static',filename='js/chat-fetch.js')}}"
     type="text/javascript"
   ></script>
 {% endblock %}

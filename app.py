@@ -426,6 +426,16 @@ def delete_message_reaction(cid,rid):
     return render_template('detail.html', messages=messages, channel=channel, uid=uid, reactions=reactions, messages_reaction=messages_reaction, followers=followers)
 
 
+@app.route('/async_get_message', methods=['POST'])
+def async_get_message():
+    uid = session.get("uid")
+    if uid is None:
+        return redirect('/login')
+    cid = request.get_data()
+    messages = dbConnect.getMessageAll(cid)
+    return messages
+
+
 @app.errorhandler(404)
 def show_error404(error):
     return render_template('error/404.html')
