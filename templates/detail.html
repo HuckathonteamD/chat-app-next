@@ -97,7 +97,8 @@
     {% if messages|length > 0 %}
       {% for message in messages %}
         {% if message.uid == uid %}
-          <div class="my-messages"> <!-- 自分のメッセージ表示 -->
+          <!-- 自分のメッセージ表示 -->
+          <div class="my-messages" id="my-message-{{message.id}}">
             {% if message.created_at == message.updated_at %}
             <div class="my-message-updatetime"> <!-- メッセージ編集時間表示 -->
               <p class="message-updatetime-right">{{ message.created_at.strftime("%Y-%m-%d %H:%M") }}</p>
@@ -142,23 +143,12 @@
                 <img src="{{url_for('static', filename='img/trashB.png')}}" alt="messageDelete">
               </button>
             </div>
-            
-            <!-- ユーザアイコン表示 -->
-            <!-- <div class="my-icon">
-              {% if message.user_icon_path %}
-                <img src="{{url_for('static', filename=message.user_icon_path)}}">
-              {% else %}
-                <img src="{{url_for('static', filename='img/user-icon/userIcon.png')}}">
-              {% endif %}
-            </div> -->
-            <!-- ユーザアイコン表示ここまで -->
-
             {% include 'modal/delete-message.html' %}
             {% include 'modal/update-message.html' %}
           </div>
         {% else %}
         <!-- 他人のメッセージ表示 -->
-          <div class="messages">
+          <div class="messages" id="other-message-{{message.id}}">
             <p class="user-name">{{ message.user_name }}</p> <!-- UIにusername表示 -->
             {% if message.created_at == message.updated_at %}
             <div class="other-message-updatetime"> <!-- メッセージ投稿時間表示 -->
@@ -208,17 +198,6 @@
               </button>
               {% include 'modal/add-reaction.html' %}
             </div>
-
-            <!-- 他人のユーザアイコン表示 -->
-            <!-- <div class="other-icon">
-              {% if message.user_icon_path %}
-                <img src="{{url_for('static', filename=message.user_icon_path)}}">
-              {% else %}
-                <img src="{{url_for('static', filename='img/user-icon/userIcon.png')}}">
-              {% endif %}
-            </div> -->
-            <!-- 他人のユーザアイコン表示ここまで -->
-
           </div>
         {% endif %}
       {% endfor %}
@@ -226,6 +205,7 @@
       <div class="noMessages">まだメッセージがありません</div> <!-- 投稿がない時のUI表示 -->
     {% endif %}
   </div>
+  {% include 'modal/add-reaction-fetch.html' %}
 
   <div class="textInput"> <!-- テキスト入力エリア -->
     <form class="typing-box" action="/message" method="POST">

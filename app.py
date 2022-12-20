@@ -1,7 +1,7 @@
 from flask import Flask, flash, redirect, render_template, url_for, request, session
 from models import dbConnect
 from util.user import User
-from util.crypto_dec import crypto_dec
+from util.crypto_dec import crypto_dec #デプロイ後使用
 from datetime import datetime, timedelta, timezone
 import hashlib
 import uuid
@@ -12,6 +12,13 @@ import random
 app = Flask(__name__)
 app.secret_key = uuid.uuid4().hex
 app.permanent_session_lifetime = timedelta(days=3)
+
+
+# リアクション数、ユーザアイコン数
+reaction_start = 1
+reaction_end = 13
+user_icon_start = 2
+user_icon_end = 11
 
 
 @app.route('/signup')
@@ -43,7 +50,7 @@ def userSignup():
         DBuser = dbConnect.getUser(email)
         DBusername = dbConnect.getUserNamebyName(name)
         current_date = datetime.now(timezone(timedelta(hours=9)))
-        uiid = random.randrange(2,11)
+        uiid = random.randrange(user_icon_start,user_icon_end)
 
         if DBuser or DBusername:
             flash('既に登録されているようです')
@@ -374,7 +381,7 @@ def update_icon():
         return redirect('/login')
     else:
         icon_id = request.form.get('icon_id')
-        if int(icon_id)<2 or 11<int(icon_id):
+        if int(icon_id)<user_icon_start or user_icon_end<int(icon_id):
             flash('アイコンを変更できませんでした')
             return redirect('/my_page')
         current_date = datetime.now(timezone(timedelta(hours=9)))
@@ -395,19 +402,19 @@ def add_message_reaction():
     current_date = datetime.now(timezone(timedelta(hours=9)))
 
     if dbConnect.searchReaction(mid, uid, mrid):
+        flash('既に同じリアクションを送信しています')
         return redirect(url_for('detail',cid=cid))
-    elif int(mrid)<1 or 13<int(mrid):
+    elif int(mrid)<reaction_start or reaction_end<int(mrid):
+        flash('リアクションを送信できませんでした')
+        return redirect(url_for('detail',cid=cid))
+    elif dbConnect.getUserIdByMessageId(mid) == None:
+        flash('既にメッセージが削除されています')
         return redirect(url_for('detail',cid=cid))
     else:
         if mrid and request.method == 'POST':
             dbConnect.createMessageReaction(mid, uid, mrid, current_date)
 
-        channel = dbConnect.getChannelById(cid)
-        messages = dbConnect.getMessageAll(cid)
-        reactions = dbConnect.getReactionAll()
-        messages_reaction = dbConnect.getMessageReactionAll(cid)
-        followers = dbConnect.getFollowerByCid(cid)
-        return render_template('detail.html', messages=messages, channel=channel, uid=uid, reactions=reactions, messages_reaction=messages_reaction, followers=followers)
+        return redirect(url_for('detail',cid=cid))
 
 
 @app.route('/delete_reaction/<int:cid>/<int:rid>')
@@ -418,22 +425,26 @@ def delete_message_reaction(cid,rid):
     if cid and rid:
         dbConnect.deleteMessageReaction(rid)
 
-    channel = dbConnect.getChannelById(cid)
-    messages = dbConnect.getMessageAll(cid)
-    reactions = dbConnect.getReactionAll()
-    messages_reaction = dbConnect.getMessageReactionAll(cid)
-    followers = dbConnect.getFollowerByCid(cid)
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid, reactions=reactions, messages_reaction=messages_reaction, followers=followers)
+    return redirect(url_for('detail',cid=cid))
 
 
 @app.route('/async_get_message', methods=['POST'])
 def async_get_message():
     uid = session.get("uid")
+    flag = "false"
     if uid is None:
         return redirect('/login')
-    cid = request.get_data()
-    messages = dbConnect.getMessageAll(cid)
-    return messages
+    if request.method == 'POST':
+        cid = request.get_data()
+        messages = dbConnect.getMessageAll(cid)
+        if messages:
+            for message in messages:
+                message["created_at"] = message["created_at"].strftime("%Y-%m-%d %H:%M")
+                message["updated_at"] = message["updated_at"].strftime("%Y-%m-%d %H:%M")
+            return messages
+        else:
+            return flag
+    return flag
 
 
 @app.errorhandler(404)

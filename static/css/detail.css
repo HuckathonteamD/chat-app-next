@@ -241,6 +241,30 @@ transition: all 0.25s;
 opacity: 0;
 }
 
+/* リアクションボタンの指定(非同期通信) */
+.reaction-btn-fetch {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  left: 90%;
+  margin-top: 15px;
+  display: inline-block;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.reaction-btn-fetch img {
+position: absolute;
+top: 0px;
+left: 0px;
+display: block;
+transition: all 0.25s;
+}
+.reaction-btn-fetch:hover img:nth-of-type(2){
+opacity: 0;
+}
+
 /* メッセージ編集ボタンの指定 */
 .update-message-btn {
   position: relative;
