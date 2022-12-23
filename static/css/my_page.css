@@ -9,22 +9,48 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     position: relative;
     background-color: #dbdbdb ;
 }
 
-header{
-    position: relative;
+header {
+    display: flex;
     background-color: black;
     width: 100%;
     height: 100px;
 }
 
-nav ul li {
+
+.ring-logo {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 185px;
+  margin-left: 10px;
+}
+
+
+.header-icons {
+  position: relative;
+  left: calc(50% - 690px);
+}
+
+.header-icons ul li {
     position: relative;
     display: inline-block;
+    align-items: center;
     list-style: none;
+    height: 100px;
+    width: 165px;
+}
+
+.header-icons ul {
+  display: flex;
+  justify-content: space-between;
+  width: 1050px;
+  height: 100px;
 }
 
 .home:hover {
@@ -44,74 +70,74 @@ nav ul li {
     height: 100px;
     width: 165px;
 }
-.logo1{
-    position: absolute;
-    top: 27px;
-    left: 10px;
+
+/* ヘッダー下のオブジェクトcenterLineの中心配置指定 */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.logo2{
-    position: absolute;
-    left: 85px;
-    top: 15px;
-}
-
-.home{
-    position: absolute;
-    left: 400px;
-}
-.mypage{
-    position: absolute;
-    left: 800px;
-}
-.logout{
-    position: absolute;
-    left: 1200px;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-.mypage {
+/* MyPageとFollowchannelの後ろ-濃いグレーの四角 */
+.user-info-sikaku {
     position: relative;
-}
-
-/* ユーザー情報の背景の四角 */
-.user-info-sikaku{
-    position: absolute;
-    width: 1550px;
-    height: 820px;
-    left: 62px;
-    top: 130px;
-    
+    display: flex;
+    width: 1200px;
+    height: 720px;
+    top: 40px;
     background: #C2C2C2;
-    box-shadow: 5px 4px 4px rgba(255, 255, 255, 0.25), inset 5px 5px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.7), inset 5px 5px 5px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
 }
 
+/* マイページ（左半分全体）の指定 */
+.mypage-container {
+  position: relative;
+  top: 0%;
+  left: 4%;
+}
+
+/* mypageとフォローチャンネルの区切り線 */
+.centerLine {
+  position: absolute;
+  width: 690px;
+  height: 2px;
+  left: 19.5%;
+  top: 50%;
+  border: 1.5px solid #000000;
+  transform: rotate(90deg);
+  background-color: #000000;
+}
+
+/* mypageの題名など */
+.mypage-unit {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 215px;
+  height: 70px;
+  left: 8%;
+  top: 4%;
+  /* border: green solid; */
+}
 /* ユーザー情報 */
-.user-info{
-    position: absolute;
-    width: 247px;
-    height: 37px;
-    left: 350px;
-    top: 175px;
-    
+.user-info-mypage {
+    position: relative;
+    width: 134px;
+    height: 30px;
     font-family: 'BIZ UDPGothic';
     font-style: normal;
     font-weight: 700;
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 28px;
+    line-height: 28px;
     color: #000000;
     cursor: default;
 }
-.user-info-japanese{
-    position: absolute;
-    width: 119px;
-    height: 20px;
-    left: 350px;
-    top: 213px;
+.user-info-japanese {
+    position: relative;
+    width: 134px;
+    height: 30px;
+    padding-top: 10px;
 
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -122,31 +148,36 @@ nav ul li {
     color: #000000;
     cursor: default;
 }
-
-.mypage-icon {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    left: 280px;
-    top: 175px;
+.mypage-unit img {
+    position: relative;
+    width: 60px;
+    height: 60px;
 }
 
+/* ユーザーアイコン　野菜 */
 .user-icon {
-    position: absolute;
-    left: 350px;
-    top: 280px;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    top: 7%;
+    left: 42%;
 }
 
-#update-icon-btn{
-    margin: 0 auto;
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
+#update-icon-btn {
+  position: relative;
+  width: 70px;
+  height: 45px;
+  top: 1%;
+  left: 65%;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
 }
-#update-icon-btn img{
+#update-icon-btn img {
     position: absolute;
-    top: 360px;
-    left: 435px;
+    top: 0px;
+    left: 0px;
     display: block;
     transition: all 0.25s;
     z-index: 1;
@@ -155,12 +186,21 @@ nav ul li {
     opacity: 0;
 }
 
-.user-name-mypage{
-    position: absolute;
+
+.user-register-info {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  left: 8.5%;
+  top: 6%;
+}
+
+
+.user-name-mypage {
+    position: relative;
     width: 111px;
     height: 18px;
-    left: 221px;
-    top: 426px;
+    margin: 0 0 5px 2px;
     
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -172,24 +212,21 @@ nav ul li {
     cursor: default;
 }
 
-.user-name-box{
-    position: absolute;
+.user-name-box {
+    position: relative;
     width: 400px;
-    height: 60px;
-    left: 221px;
-    top: 453px;
-    
+    height: 60px;   
     background: #FFFFFF;
     border-radius: 5px;
     cursor: default;
 }
 
-#db-user-name{
-    position: absolute;
+#db-user-name {
+    position: relative;
     width: 340px;
     height: 18px;
-    left: 253px;
-    top: 473px;
+    left: 10px;
+    top: -38px;
     
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -210,11 +247,10 @@ nav ul li {
 }
 
 .mail-address{
-    position: absolute;
+    position: relative;
     width: 131px;
     height: 18px;
-    left: 221px;
-    top: 532px;
+    margin: 0 0 5px 2px;
     
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -227,11 +263,11 @@ nav ul li {
 }
 
 .mail-address-box{
-    position: absolute;
+    position: relative;
     width: 400px;
     height: 60px;
-    left: 221px;
-    top: 559px;
+    /* left: 221px; */
+    /* top: 559px; */
     
     background: #FFFFFF;
     border-radius: 5px;
@@ -239,11 +275,11 @@ nav ul li {
 }
 
 #db-email{
-    position: absolute;
+    position: relative;
     width: 340px;
     height: 18px;
-    left: 253px;
-    top: 580px;
+    left: 10px;
+    top: -38px;
     
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -264,28 +300,32 @@ nav ul li {
 }
 
 #update-name-email-btn{
-    margin: 0 auto;
+  position: relative;
+    width: 150px;
+    height: 40px;
+    left: 250px;
     display: block;
     overflow: hidden;
     cursor: pointer;
+    background: transparent;
 }
 #update-name-email-btn img{
-    position: absolute;
-    left: 470px;
-    top: 648px;
-    display: block;
-    transition: all 0.25s;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  transition: all 0.25s;
+  z-index: 1;
 }
 #update-name-email-btn:hover img:nth-of-type(2){
     opacity: 0;
 }
 
-.password{
-    position: absolute;
+.password {
+    position: relative;
     width: 98px;
     height: 18px;
-    left: 221px;
-    top: 727px;
+    margin: 18px 0 5px 2px;
 
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -296,23 +336,23 @@ nav ul li {
     color: #000000;
     cursor: default;
 }
-.password-box{
-    position: absolute;
+.password-box {
+    position: relative;
     width: 400px;
     height: 60px;
-    left: 221px;
-    top: 756px;
+    /* left: 221px;
+    top: 756px; */
     
     background: #FFFFFF;
     border-radius: 5px;
     cursor: default;
 }
-.password-txt{
-    position: absolute;
+.password-txt {
+    position: relative;
     width: 153px;
     height: 18px;
-    left: 253px;
-    top: 777px;
+    left: 10px;
+    top: -38px;
     
     font-family: 'BIZ UDPGothic';
     font-style: normal;
@@ -323,60 +363,62 @@ nav ul li {
     color: #000000;
     cursor: default;
 }
-#update-password-btn{
-    margin: 0 auto;
+#update-password-btn {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    left: 250px;
     display: block;
     overflow: hidden;
     cursor: pointer;
+    background: transparent;
 }
-#update-password-btn img{
-    position: absolute;
-    /* width: 180px;
-    height: 40px; */
-    left: 470px;
-    top: 845px;
-    display: block;
-    transition: all 0.25s;
+#update-password-btn img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  transition: all 0.25s;
+  z-index: 1;
 }
+
 #update-password-btn:hover img:nth-of-type(2){
     opacity: 0;
 }
 
-/* mypageとフォローチャンネルの区切り */
-.centerLine {
-    position: absolute;
-    width: 750px;
-    height: 0px;
-    left: 330px;
-    top: 410px;
-    border: 1px solid #000000;
-    transform: rotate(90deg);
-    background-color: #000000;
-  }
 
-  /* フォローチャンネル */
-.follow-channels{
-    position: absolute;
-    width: 337px;
-    height: 37px;
-    left: 960px;
-    top: 176px;
+.follow-channnel-container {
+  position: relative;
+  top: 5%;
+  left: 23%;
+}
+
+  /* フォローチャンネル題名 */
+.follow-channels-unit {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 340px;
+  height: 70px;
+  left: 0%;
+}
+.follow-channels {
+    position: relative;
+    width: 270px;
+    height: 35px;
     
     font-family: 'BIZ UDPGothic';
     font-style: normal;
     font-weight: 700;
-    font-size: 36px;
-    line-height: 36px;
+    font-size: 28px;
+    line-height: 28px;
     color: #000000;
     cursor: default;
 }
-.follow-channels-japanese{
-    position: absolute;
-    width: 192px;
-    height: 20px;
-    left: 960px;
-    top: 214px;    
-    
+.follow-channels-japanese {
+    position: relative;
+    width: 270px;
+    height: 35px;
     font-family: 'BIZ UDPGothic';
     font-style: normal;
     font-weight: 700;
@@ -386,25 +428,24 @@ nav ul li {
     color: #000000;
     cursor: default;
 }
-
-.follow-channels-icon {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    left: 895px;
-    top: 180px;
+.follow-channels-unit img {
+  position: relative;
+  width: 50px;
+  height: 50px;
 }
 
-.channel-scroll{
-    position: absolute;
-    width: 740px;
-    height: 630px;
-    left: 800px;
-    top: 270px;
+/* フォローチャンネル一覧 */
+.channel-scroll {
+    position: relative;
+    width: 500px;
+    height: 530px;
+    left: -4%;
+    top: 0%;
     border: none;
 
-    padding-left: 100px;
-    padding-bottom: 100px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
       /*上下方向にはみ出した要素ををスクロールさせる*/
     overflow-y: scroll;
     /*スクロールバー非表示（IE・Edge）*/
@@ -413,22 +454,21 @@ nav ul li {
     scrollbar-width: none;
 }
 /*スクロールバー非表示（Chrome・Safari）*/
-.channel-scroll::-webkit-scrollbar{
+.channel-scroll::-webkit-scrollbar {
     display:none;
 }
 
-.follow-channel-box{
+/* フォローチャンネルリスト */
+.follow-channel-box {
     position: relative;
-    width: 500px;
+    width: 450px;
     height: 100px;
-
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
     border-radius: 0px 30px 30px 0px;
     background: white;
-
     margin-top: 25px;
 }
-.unfollow-channel-btn{
+.unfollow-channel-btn {
     position: absolute;
     left: 0px;
     top: 0px;
@@ -437,11 +477,11 @@ nav ul li {
     background: transparent;
     cursor: pointer;
 }
-.follow-channel-name{
+.follow-channel-name {
     position: absolute;
-    left: 135px;
+    left: 120px;
     top: 24px;
-    width: 330px;
+    width: 290px;
     height: 25px;
 
     font-family: 'BIZ UDPGothic';
@@ -467,11 +507,11 @@ nav ul li {
     color:#870041;
 }
 
-.follow-channel-abstract{
+.follow-channel-abstract {
     position: absolute;
-    left: 135px;
+    left: 120px;
     top: 50px;
-    width: 330px;
+    width: 290px;
     height: 30px;
     
     font-family: 'BIZ UDPGothic';
@@ -492,8 +532,84 @@ nav ul li {
     display:none;
 }
 
-.flashes{
+/* フラッシュの表示 */
+.flashes {
+    position: absolute;
+    left: 20%;
+    top: -710px;
+    height: 25px;
     font-family: 'BIZ UDPGothic';
     font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
     color: red;
+}
+
+/* フォロー解除しますかの吹き出し表示指示 */
+.unfollow-channel-btn span {
+    position: absolute;
+    width: 150px;
+    /* height: 50px; */
+    left: -20px;
+    top: -30px;
+    font-size: 16px;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    /*テキストを非表示にしておく*/
+    display: none;
+    opacity: 0;
+  
+    /*hover時の表示スタイルを指定*/
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: #C1005D;
+    /*影をつける*/
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 1px 0 0 rgba(255, 255, 255, 0.3),
+      inset -1px 0 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  
+    /*アニメーションを指定*/
+    animation-duration: 0.3s;
+    animation-name: show-balloon;
+  }
+  
+  /*マウスホバー時のバルーンのスタイル*/
+  .unfollow-channel-btn:hover span {
+    /*テキストを表示する*/
+    display: inline-block;
+    opacity: 1;
+    top: -40px;
+  }
+  
+  /*吹き出し部分の三角形を表示します*/
+  .unfollow-channel-btn span::before {
+    content: "";
+    position: absolute;
+    top: 97%;
+    left: 20px;
+    border: 6px solid transparent;
+    border-top: 10px solid #C1005D;
+}
+/*アニメーションを定義*/
+@keyframes show-balloon {
+  0% {
+    display: none;
+    opacity: 0;
+    top: -30px;
+  }
+  1% {
+    display: inline-block;
+    opacity: 0;
+    top: -30px;
+  }
+  100% {
+    display: inline-block;
+    opacity: 1;
+    top: -40px;
+  }
 }

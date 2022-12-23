@@ -81,10 +81,13 @@ nav ul li {
 }
 
 .main-container-channelpage {
-  position: absolute;
+  /* position: absolute;
   top: 100px;
   left: 50%;
-  transform: translate(-50%,0%);
+  transform: translate(-50%,0%); */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* HOMEアイコン、チャンネル作成ボタンの全体の指定 */
@@ -106,31 +109,34 @@ nav ul li {
     grid-row: 1 / 3;
     grid-column: 1 / 2;
     width: 250px;
-    height: 95px;
-    left: 187px;
+    height: 70px;
+    left: 170px;
+  }
+  .home-icon img {
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    width: 60px;
+    height: 60px;
 }
-.home-icon img {
-  grid-row: 1 / 3;
-  grid-column: 1 / 2;
-  width: 90px;
-  height: 90px;
-}
-.Home{
+.Home {
+    position: relative;
     grid-row: 1 / 2;
     grid-column: 2 / 3;
-    height: 45px;
-    padding-top: 20px;
+    height: 35px;
+    left: -15px;
     font-family: 'BIZ UDPGothic';
     font-style: normal;
     font-weight: 700;
     font-size: 30px;
     color: #000000;
 }
-.channel{
+.channel {
+    position: relative;
     grid-row: 2 / 3;
     grid-column: 2 / 3;
-    height: 45px;
-    padding-top: 18px;
+    height: 35px;
+    top: -10px;
+    left: -15px;
     font-family: 'BIZ UDPGothic';
     font-style: normal;
     font-weight: 700;
@@ -139,7 +145,7 @@ nav ul li {
 }
 
 /* チャンネル作成ボタンの指定 */
-#add-channel-btn{
+#add-channel-btn {
   width: 250px;
   height: 50px;
   margin-right: 5px;
@@ -156,17 +162,14 @@ nav ul li {
 
 
 /* ★チャンネルリストの指定★ */
-.channels-box {
-    position: relative;
-    display: flex;
-    width: 1100px;
-    height: 530px;
-}
-
 .channel-box {
   display: flex;
-  flex-wrap: wrap;
+  width: 1100px;
+  height: 530px;
   justify-content: space-between;
+  flex-wrap: wrap;
+  -webkit-align-content: flex-start;
+  align-content: flex-start;
 }
 
 /* フォローチャンネルボタン-ハートマーク線*/
@@ -198,7 +201,7 @@ nav ul li {
     padding: 5px;
     border-radius: 5px;
     color: white;
-    background-color: rgb(129, 129, 129);
+    background-color: #C1005D;
     /*影をつける*/
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5),
       inset 0 1px 0 rgba(255, 255, 255, 0.8),
@@ -227,7 +230,7 @@ nav ul li {
     top: 97%;
     left: 20px;
     border: 6px solid transparent;
-    border-top: 10px solid rgb(129, 129, 129);
+    border-top: 10px solid #C1005D;
 }
 /*アニメーションを定義*/
 @keyframes show-balloon {
@@ -276,7 +279,7 @@ nav ul li {
   padding: 5px;
   border-radius: 5px;
   color: white;
-  background-color: rgb(129, 129, 129);
+  background-color: #C1005D;
   /*吹き出しに影をつける*/
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.8),
@@ -305,7 +308,7 @@ nav ul li {
     top: 97%;
     left: 20px;
     border: 6px solid transparent;
-    border-top: 10px solid rgb(129, 129, 129);
+    border-top: 10px solid #C1005D;
   }
 
   /*アニメーションを定義*/
@@ -450,8 +453,3 @@ nav ul li {
     color: #C1005D;
 }
 
-/* #channel-inline {
-
-} */
-/* .channel-name .channel-abstract .delete-channel-btn {
-} */

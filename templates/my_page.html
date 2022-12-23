@@ -9,79 +9,88 @@
 {% block body %}
 <body>
   <header>
-      <nav>
-          <ul>
-              <li class="logo1"><img src="{{url_for('static', filename='img/Channel-chatIcon.png')}}" alt="icon"></li>
-              <li class="logo2"><img src="{{url_for('static', filename='img/Channel-Ring.png')}}" alt="ring"></li>
-              <li class="home"><a href="{{ url_for('index') }}"><img src="{{url_for('static', filename='img/Home-White.png')}}" alt="home"></a></li>
-              <li class="mypage"><a href="{{ url_for('my_page') }}"><img src="{{url_for('static', filename='img/myPage-White.png')}}" alt="mypage"></a></li>
-              <li class="logout" id="logout"><img src="{{url_for('static', filename='img/Logout-White.png')}}" alt="logout"></li>
-          </ul>
-      </nav>
+    <div class="ring-logo">
+      <img src="{{url_for('static', filename='img/Channel-chatIcon.png')}}" alt="icon">
+      <img src="{{url_for('static', filename='img/Channel-Ring.png')}}" alt="ring">
+    </div>
+    <div class="header-icons">
+      <ul>
+        <li class="home"><a href="{{ url_for('index') }}"><img src="{{url_for('static', filename='img/Home-White.png')}}" alt="home"></a></li>
+        <li class="mypage"><a href="{{ url_for('my_page') }}"><img src="{{url_for('static', filename='img/myPage-White.png')}}" alt="mypage"></a></li>
+        <li class="logout" id="logout"><img src="{{url_for('static', filename='img/Logout-White.png')}}" alt="logout"></li>
+      </ul>
+    </div>
   </header>
-<!-- </body> -->
+  <div class="main-container">
+    <!-- バックの濃いグレーの四角 -->
+    <div class="user-info-sikaku">
+      <!-- ユーザー情報一覧 -->
+      <div class="mypage-container">
+        <!-- 左上のアイコンMyPageユーザー情報 -->
+        <div class="mypage-unit">
+          <img src="../static/img/myPage-icon.png">
+          <div class="user-info">
+            <h1 class="user-info-mypage">My Page</h1>
+            <h3 class="user-info-japanese">ユーザー情報</h3>
+          </div>  
+        </div>  
 
-<!-- <body bgcolor="#DBDBDB"> -->
-  <div class="user-info-sikaku">
-    <div class="centerLine"></div>
-  </div>
-  <div class="follow-channel-sikaku"></div>
-
-    <div id="update-name-email-btn">
-      <img src="{{url_for('static', filename='img/edit-hover.png')}}" />
-      <img src="{{url_for('static', filename='img/edit.png')}}" />
-    </div>
-    <div id="update-password-btn">
-      <img src="{{url_for('static', filename='img/edit-hover.png')}}" />
-      <img src="{{url_for('static', filename='img/edit.png')}}" />
-    </div>
-    <div id="update-icon-btn">
-      <img src="{{url_for('static', filename='img/changeIconB.png-hover.png')}}" />
-      <img src="{{url_for('static', filename='img/changeIconB.png')}}" />
-    </div>
-  
-    <!-- flashの表示 -->
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class="flashes">
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-
-  <div>
-    <h1 class="user-info">My Page</h1>
-    <h3 class="user-info-japanese">ユーザー情報</h3>
-    <div class="mypage-icon"><img src="../static/img/myPage-icon.png"></div>
-    <!-- <div class="user-icon"><img src="{{url_for('static', filename='img/userIcon.png')}}"></div> -->
-    <!-- ユーザー情報 -->
-    <div class="user-icon">
-      <p class="user-img"></p>
-      {% if icon %}
-        <img src="{{url_for('static', filename=icon.user_icon_path)}}" />
-      {% else %}
-        <img src="{{url_for('static', filename='img/user-icon/userIcon.png')}}" />
-      {% endif %}
-    </div>
-      <P class="user-name-mypage">User Name</P>
-        <div class="user-name-box"></div>
-        <p id="db-user-name">{{name.user_name}}</p>
-
-      <p class="mail-address">Mail Address</p>
-        <div class="mail-address-box"></div>
-        <p id="db-email">{{email.email}}</p>
+        <!-- ユーザーのアイコン -->
+        <div class="user-icon">
+          {% if icon %}
+            <img src="{{url_for('static', filename=icon.user_icon_path)}}" />
+          {% else %}
+            <img src="{{url_for('static', filename='img/user-icon/userIcon.png')}}" />
+          {% endif %}
+        </div>
+        <!-- ユーザーアイコン変更ボタン -->
+        <div id="update-icon-btn">
+          <img src="{{url_for('static', filename='img/changeIconB.png-hover.png')}}" />
+          <img src="{{url_for('static', filename='img/changeIconB.png')}}" />
+        </div>
+        <!-- ユーザーの登録情報フォーム・変更ボタン -->
+        <div class="user-register-info">
+          <P class="user-name-mypage">User Name</P>
+          <div class="user-name-box"></div>
+          <p id="db-user-name">{{name.user_name}}</p>
+          
+          <p class="mail-address">Mail Address</p>
+          <div class="mail-address-box"></div>
+          <p id="db-email">{{email.email}}</p>
+          
+          <!-- ユーザーネーム・メールアドレス変更ボタン -->
+          <div id="update-name-email-btn">
+            <img src="{{url_for('static', filename='img/edit-hover.png')}}" />
+            <img src="{{url_for('static', filename='img/edit.png')}}" />
+          </div>
+          
+          <p class="password">Password</p>
+          <div class="password-box"></div>
+          <p class="password-txt">**********</p>
+          
+          <!-- パスワード変更ボタン -->
+          <div id="update-password-btn">
+            <img src="{{url_for('static', filename='img/edit-hover.png')}}" />
+            <img src="{{url_for('static', filename='img/edit.png')}}" />
+          </div>
+        </div>
+      </div>
         
-      <p class="password">Password</p>
-        <div class="password-box"></div>
-        <p class="password-txt">**********</p>
+      <!-- センターライン -->
+      <div class="centerLine"></div>
 
-    <!-- フォローチャンネル -->
-      <h1 class="follow-channels">Follow Channels</h1>
-      <h3 class="follow-channels-japanese">お気に入りチャンネル</h3>
-      <div class="follow-channels-icon"><img src="../static/img/myPage-heart.png"></div>
-      <ul class="channel-scroll">
+        <!-- フォローチャンネル -->
+      <div class="follow-channnel-container">
+
+        <div class="follow-channels-unit">
+          <img src="../static/img/myPage-heart.png">
+          <div class="follow-info">
+            <h1 class="follow-channels">Follow Channels</h1>
+            <h3 class="follow-channels-japanese">お気に入りチャンネル</h3>
+          </div>
+        </div>
+          
+        <ul class="channel-scroll">
           {% for follow_channel in follow_channels %}  
           <div>
             <div class="follow-channel-box">
@@ -90,6 +99,7 @@
                   <td>
                     <button type="button" class="unfollow-channel-btn">
                       <img src="{{url_for('static', filename='img/channelPic-heart.png')}}">
+                      <span>クリックすると<br>フォローを解除</span>
                     </button>
                   </td>
                   <td>
@@ -101,11 +111,26 @@
                   {% include 'modal/unfollow-channel.html' %}
                 </tr>
               </table> 
-          </div>
-          <!-- <br> -->
-        {% endfor %}
-      </ul>
+            </div>
+            <!-- <br> -->
+            {% endfor %}
+          </ul>
+      </div>
+    </div>
   </div>
+
+      <!-- flashの表示 -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="flashes">
+            {% for message in messages %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+
   {% include 'modal/update-name-email.html' %}
   {% include 'modal/update-password.html' %}
   {% include 'modal/update-icon.html' %}
