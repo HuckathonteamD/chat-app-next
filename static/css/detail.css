@@ -345,6 +345,22 @@ opacity: 0;
   color: red;
 }
 
+.active {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: green;
+}
+
+.inactive {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: grey;
+}
+
 
 /* テキスト入力エリア */
 /* .typing-box textarea {
