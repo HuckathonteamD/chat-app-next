@@ -18,6 +18,10 @@ const reactionBtn = document.getElementsByClassName("reaction-btn");
 const reactionModal = document.getElementsByClassName("reaction-modal");
 const reactionPageButtonClose = document.getElementsByClassName("reaction-page-close-btn");
 
+// リアクション非同期
+const reactionFetchModal = document.getElementById("reaction-modal-fetch");
+const reactionFetchPageButtonClose = document.getElementById("reaction-page-close-btn-fetch");
+
 // ログアウト
 const logoutBtn = document.getElementById("logout-btn");
 const logoutModal = document.getElementById("logout-modal");
@@ -31,6 +35,8 @@ function modalOpen(mode) {
     } else {
       updateChannelModal.style.display = "block";
     }
+  } else if (mode === "reaction-fetch") {
+    reactionFetchModal.style.display = "block";
   } else if (mode === "logout") {
     logoutModal.style.display = "block";
   }
@@ -70,7 +76,6 @@ if (updatePageButtonClose) {
     updateChannelModal.style.display = "none";
   });
 }
-
 for( let i=0 ; i<updateMessagePageButtonClose.length ; i++ ) {
   updateMessagePageButtonClose[i].addEventListener("click", () => {
     updateMessageModal[i].style.display = "none";
@@ -84,7 +89,11 @@ for( let i=0 ; i<reactionPageButtonClose.length ; i++ ) {
     reactionModal[i].style.display = "none";
   });
 }
-
+if (reactionFetchPageButtonClose) {
+  reactionFetchPageButtonClose.addEventListener("click", () => {
+    reactionFetchModal.style.display = "none";
+  });
+}
 if (logoutPageButtonClose) {
   logoutPageButtonClose.addEventListener("click", () => {
     logoutModal.style.display = "none";
@@ -95,6 +104,8 @@ if (logoutPageButtonClose) {
 addEventListener("click", (e) => {
   if (e.target == updateChannelModal) {
     updateChannelModal.style.display = "none";
+  } else if (e.target == reactionFetchModal) {
+    reactionFetchModal.style.display = "none";
   } else if (e.target == logoutModal) {
     logoutModal.style.display = "none";
   }
