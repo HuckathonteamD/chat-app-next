@@ -83,6 +83,8 @@ def userLogin():
 
 @app.route('/logout')
 def logout():
+    uid = session.get("uid")
+    dbConnect.userDeactivate(uid)
     session.clear()
     return redirect('/login')
 
@@ -90,6 +92,11 @@ def logout():
 @app.route('/')
 def index():
     uid = session.get("uid")
+    req = request.args
+    status = req.get("status")
+    print(status)
+    if status == 'active':
+        dbConnect.userDeactivate(uid)
     if uid is None:
         return redirect('/login')
     else:
@@ -142,6 +149,7 @@ def detail(cid):
     uid = session.get("uid")
     if uid is None:
         return redirect('/login')
+    dbConnect.userActivate(uid, cid)
     channel = dbConnect.getChannelById(cid)
     messages = dbConnect.getMessageAll(cid)
     reactions = dbConnect.getReactionAll()
@@ -272,6 +280,7 @@ def unfollow_channel_i(cid):
 @app.route('/my_page')
 def my_page():
     uid = session.get("uid")
+    dbConnect.userDeactivate(uid)
     if uid is None:
         return redirect ('/login')
     else:

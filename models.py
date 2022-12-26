@@ -219,6 +219,7 @@ class dbConnect:
         finally:
             cur.close()
 
+
     def getNumberOfFollowers(cid):
         try:
             conn = DB.getConnection()
@@ -227,6 +228,33 @@ class dbConnect:
             cur.execute(sql, cid)
             numberOfFollows = cur.fetchone()
             return numberOfFollows
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close()
+
+    
+    def userActivate(uid, cid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE user_follow_channel SET status='active' WHERE uid=%s AND cid=%s;"
+            cur.execute(sql, (uid, cid))
+            conn.commit()
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close()
+
+    def userDeactivate(uid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "UPDATE user_follow_channel SET status='inactive' WHERE uid=%s;"
+            cur.execute(sql, (uid))
+            conn.commit()
         except Exception as e:
             print(e + 'が発生しています')
             return None
@@ -253,7 +281,7 @@ class dbConnect:
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT u.user_name, user_icon_path FROM user_follow_channel as f INNER JOIN users as u ON u.uid=f.uid \
+            sql = "SELECT u.user_name, user_icon_path, f.status FROM user_follow_channel as f INNER JOIN users as u ON u.uid=f.uid \
                 INNER JOIN user_icon as i ON u.uiid=i.id WHERE f.cid=%s;"
             cur.execute(sql, (cid))
             follower = cur.fetchall()
