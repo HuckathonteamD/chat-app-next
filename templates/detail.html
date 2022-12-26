@@ -25,7 +25,7 @@
       <ul>
         <li class="logo1"><img src="{{url_for('static', filename='img/Channel-chatIcon.png')}}" alt="icon"></li> <!-- ロゴ -->
         <li class="logo2"><img src="{{url_for('static', filename='img/Channel-Ring.png')}}" alt="ring"></li> <!-- ロゴ -->
-        <li class="home"><a href="{{ url_for('index') }}"><img src="{{url_for('static', filename='img/Home-White.png')}}" alt="home"></a></li> <!-- チャンネル一覧へ遷移 -->
+        <li class="home"><a href="{{ url_for('index', status='active') }}"><img src="{{url_for('static', filename='img/Home-White.png')}}" alt="home"></a></li> <!-- チャンネル一覧へ遷移 -->
         <li class="mypage"><a href="{{ url_for('my_page') }}"><img src="{{url_for('static', filename='img/myPage-White.png')}}" alt="mypage"></a></li> <!-- Mypageへ -->
         <li class="logout" id="logout-btn"><img src="{{url_for('static', filename='img/Logout-White.png')}}" alt="logout"></li> <!-- ログアウト -->
     </ul>
@@ -74,6 +74,7 @@
                       <img src="{{url_for('static', filename='img/user-icon/userIcon.png')}}">
                     {% endif %}
                     <p>{{user.user_name}}</p>
+                    <a class="{{user.status}}"></a>
                   </li>
                 </ul>  
               {% endfor %}
@@ -237,6 +238,10 @@
   ></script>
   <script
     src="{{url_for('static',filename='js/chat-fetch.js')}}"
+    type="text/javascript"
+  ></script>
+  <script
+    src="{{url_for('static',filename='js/detail-modal.js')}}"
     type="text/javascript"
   ></script>
 {% endblock %}
