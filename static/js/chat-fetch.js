@@ -4,12 +4,12 @@ window.onload = function() {
   const elm = document.documentElement;
   let barTop;
   let lastId = messages[messages.length-1].id;
-  let messageId = [];
+  let messageIM = {};
 
-  messages.forEach(message=>{
-    messageId.push(message.id);
+  messages.forEach((message,n)=>{
+    messageIM[n] = {id:message.id,mes:message.message};
   });
-
+  console.log(messageIM);
   // 一定時間ごとに処理を実行
   setInterval(()=>{
 
@@ -36,7 +36,9 @@ window.onload = function() {
 
       if( responses !== false ) {
         
-        let messageIdDiff = messageId.map(x=>x);
+        let messageIMDiff = {};
+        messageIMDiff = Object.assign(messageIM);
+        console.log(messageIMDiff);
         responses.forEach(response=>{
 
           // メッセージ追加
@@ -104,12 +106,29 @@ window.onload = function() {
               barTop = "False";
             }
             messageArea.appendChild(messagesDiv);
-            messageId.push(response.id);
+            messageIM[messageIM.length] = {id:response.id,mes:reseponse.message};
           }
-          // メッセージ削除用
+          // メッセージ編集、削除用
           else {
-            let idNum = messageIdDiff.indexOf(response.id);
-            messageIdDiff.splice(idNum, 1);
+            let idNum = -1;
+            messageIMDiff.forEach((IM, i) => {
+              console.log(IM.message);
+              if( IM.id == response.id ){
+                idNum = i;
+                if( uid != response.uid && IM.message != response.message ){
+                  const messageEdit = document.querySelector(`#other-message-${IM.id} .user-name`);
+                  messageEdit.innerText = response.message;
+                  const messageTimeEdit = document.querySelector(`#other-message-${IM.id} .other-message-updatetime`);
+                  const timeEditP = document.createElement("p");
+                  timeEditP.classList.add("message-updatetime-left-edit");
+                  timeEditP.innerText = "編集:"+ response.updated_at;
+                  messageTimeEdit.appendChild(timeEditP);
+                }
+              }
+            });
+            console.log(idNum);
+            messageIMDiff.splice(idNum, 1);
+            console.log(messageIMDiff);
           }
         });
         // 最後のid更新
@@ -117,10 +136,10 @@ window.onload = function() {
           lastId = responses[responses.length-1].id;
         }
         // メッセージ削除
-        if( messageIdDiff ){
-          for(let j=0;j<messageIdDiff.length;j++){
-            document.getElementById(`other-message-${messageIdDiff[j]}`).style.display = "none";
-            messageId.splice(messageIdDiff.indexOf(messageIdDiff[j],1));
+        if( messageIMDiff ){
+          for(let j=0;j<messageIMDiff.length;j++){
+            document.getElementById(`other-message-${messageIMDiff[j]}`).style.display = "none";
+            messageIM.splice(messageIMDiff.indexOf(messageIMDiff[j],1));
           }
         }
         // スクロール
