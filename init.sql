@@ -47,6 +47,7 @@ CREATE TABLE user_follow_channel(
     id serial PRIMARY KEY,
     uid varchar(50) REFERENCES users(uid),
     cid BIGINT UNSIGNED,
+    status varchar(10) DEFAULT 'inactive',
     FOREIGN KEY (cid) REFERENCES channels(id) ON DELETE CASCADE
 );
 
