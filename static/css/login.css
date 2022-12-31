@@ -1,74 +1,136 @@
 @charset "utf-8";
-@media screen and (max-width: 768px) {
-  
-}
+/* @media screen and (max-width: 768px) {
+} */
 
 * {
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body{
+  position: relative;
   background-image: url(../img/back.jpg);
   background-size: cover;
   width: 100%;
   height: 100vh;
-  margin: 0;
-  padding: 0;
-  font-family: 'BIZ UDPGothic';
 }
 
+/* ロゴ・ログインフォーム両方を含む全体の指定 */
+.main-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: calc(50% - 310px);
+}
+@media screen and (max-width:830px) {
+/* 　画面サイズが830pxからはここを読み込む　 */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    width: 530px;
+    top: calc(50% - 450px);
+    left: calc(50% - 265px);
+  }
+}
+@media screen and (max-width:480px) {
+  /* 　画面サイズが480pxからはここを読み込む　 */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    top: calc(50% - 375px);
+    left: calc(50% - 180px);
+  }
+}
+
+/* Ringロゴ・ログインフォーム個別の指定 */
+.contain-container {
+  height: 620px;
+  width: 620px;
+  text-align: center;
+}
+.login-logo {
+  position: relative;
+  width: 425px;
+  height: 496px;
+  left: calc(50% - 212.5px);
+  top: calc(50% - 248px);
+}
+@media screen and (max-width:830px) {
+/* 　画面サイズが830pxからはここを読み込む　 */
+  .contain-container--left {
+    position: relative;
+    width: 530px;
+    height: 370px;
+  }
+  .contain-container--right {
+    width: 530px;
+    height: 530px;
+  }
+  .login-logo img {
+    position: relative;
+    width: 288px;
+    height: 325px;
+    top: calc(50% - 162.5px);
+  }
+}
+@media screen and (max-width:480px) {
+  /* 　画面サイズが480pxからはここを読み込む　 */
+  .contain-container--left {
+    position: relative;
+    width: 360px;
+    height: 300px;
+  }
+  .contain-container--right {
+    width: 360px;
+    height: 450px;
+  }
+  .login-logo img {
+    position: relative;
+    width: 200px;
+    height: 233.41px;
+    top: calc(50% - 116px);
+  }
+}
+
+/* ログインフォーム半透明の四角の指定 */
 .marusikaku{
-    /* 上の四角 */
-    position: absolute;
+    /* 濃い白の四角 */
+    position: relative;
     width: 590px;
     height: 590px;
-    left: calc(66% - 295px);
-    top: calc(50% - 295px);
+    top: -600px;
+    left: 10px;
     background: rgba(255, 255, 255, 0.65);
     border-radius: 230px 230px 230px 180px;
     transform: rotate(83.21deg);
+    z-index: 3;
 }
-
 .sikaku{
-     /* 後ろの四角 */
-    position: absolute;
+    /* 薄い色の四角 */
+    position: relative;
     width: 620px;
     height: 620px;
-    left: calc(66% - 310px);
-    top: calc(50% - 310px);
     background: rgba(255, 255, 255, 0.3);
     border-radius: 250px 250px 250px 200px;
-
 }
 
-.login-logo{
-    position: absolute;
-    z-index: 9;
-    margin: 0px, 143px, 0px, 0px;
-    width: 425px;
-    height: 496px;
-    /* 213から180へ */
-    left: calc(33% - 212.5px);
-    top: calc(50% - 248px);
-}
-
-
+/* ログインフォームの指定 */
 #login-box{
-    position: absolute;
+    position: relative;
     z-index: 10;
     box-sizing: border-box;
     text-align: center;
     width: 357px;
     height: 425px;
     width: 357px;
-    /* left: 57%;
-    top: 29%; */
-    left: calc(66% - 178.5px);
-    top: calc(50% - 212.5px);
+    left: 120px;
+    top: -1090px;
     border: none;
 }
 
-.h1{
+.h1 {
     width: 97px;
     height: 32px;
     font-family: 'BIZ UDPGothic';
@@ -78,6 +140,7 @@ body{
     cursor: default;
 }
 
+/* ログイン入力フォームの指定 */
 input[type="email"]{
     margin: 28px 0px 0px 0px;
 }
@@ -192,11 +255,11 @@ input[type="password"]{
   left: 38px;
 }
 
-
 /* パスワードが間違っています！
 空のフォームがあるようですの表示 */
 .flashes{
     position: absolute;
+    top: 35px;
     font-family: 'BIZ UDPGothic';
     font-style: normal;
     color: red;
@@ -205,4 +268,363 @@ input[type="password"]{
     margin: 0;
 }
 
+@media screen and (max-width:830px) {
+/* 　画面サイズが768pxからはここを読み込む　 */
+.marusikaku{
+  /* 濃い白の四角 */
+  position: relative;
+  width: 500px;
+  height: 500px;
+  top: -515px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 200px 200px 200px 150px;
+  transform: rotate(83.21deg);
+  z-index: 3;
+}
+.sikaku{
+  /* 薄い色の四角 */
+  position: relative;
+  width: 530px;
+  height: 530px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 220px 220px 220px 170px;
+  }
+  
+    /* ログインフォームの指定 */
+    #login-box {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 360px;
+      height: 386px;
+      top: -970px;
+      left: calc(50% - 180px);
+      z-index: 10;
+    }
+  
+    .h1 {
+      position: absolute;
+      width: 360px;
+      height: 24px;
+      top: 0px;
+      margin-bottom: 10px;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      cursor: default;
+    }
+  
+    /* ログイン入力フォームの指定 */
+    input[type="email"],
+    input[type="password"]{
+      position: relative;
+      cursor: pointer;
+      margin-bottom: 20px;
+      padding: 10px;
+      top: 50px;
+      width: 300px;
+      height: 30px;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #000000;
+      transition: all 1s;
+      background: none;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+    }
+  
+    .login-button {
+      position: relative;
+      margin-bottom: 5px;
+      margin: 12px 0px 22px 0px;
+      top: 40px;
+      padding: 0;
+      background: #C1005D;
+      color: white;
+      cursor: pointer;
+      border: none;
+      border-radius:5px;
+      width: 300px;
+      height: 40px;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 18px;
+      transition: all 0.3s;
+    }
+    .login-button:hover {
+      background-color: #870041;
+    }
+  
+    .sign-up {
+      position: relative;
+      display: inline-block;
+      width: 225px;
+      height: 50px;
+      top: 30px;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 200%;
+      text-align: center;
+      color: #000000;
+      cursor: default;
+    }
+  
+    .switch-register-mode {
+      text-decoration: none;
+      color: #C1005D;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      transition: all 0.2s;
+    }
+    .switch-register-mode:hover {
+      color: #278BFF;
+    }
+  
+    .or {
+      position: relative;
+      top: 20px;
+    }
+  
+    .or img {
+      width: 300px;
+      height: 8px;
+    }
+  
+    /* google-ボタン指定 */
+    .google-login{ 
+      position: relative;
+      width: 300px;
+      height: 40px;
+      top: -20px;
+      /* background: #FFFFFF; */
+      border-radius: 5px;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 18px;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      color: #595959;
+      transition: all 0.25s;
+    }
+    .google-login:hover{
+      background-color: #d4d4d4;
+      color: white;
+    }
+    .g-button {
+      position: relative;
+      width: 300px;
+      height: 40px;
+  
+      /* margin: 70px 0px 0px 0px; */
+    }
+  
+    .g-button img {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    }
+  
+    /* パスワードが間違っています！
+    空のフォームがあるようですの表示 */
+    .flashes{
+      position: absolute;
+      top: 40px;
+      font-family: 'BIZ UDPGothic';
+      font-style: normal;
+      color: red;
+      list-style:none;
+      padding: 0;
+      margin: 0;
+    }
+}
+
+@media screen and (max-width:480px) {
+/* 　画面サイズが480pxからはここを読み込む　 */
+  .marusikaku{
+    display: none;
+  }
+
+  .sikaku{
+    /* 薄い色の四角 */
+    position: relative;
+    width: 360px;
+    height: 450px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+  }
+
+    /* ログインフォームの指定 */
+  #login-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 360px;
+    height: 386px;
+    top: -418px;
+    left: calc(50% - 180px);
+    z-index: 10;
+  }
+
+  .h1 {
+    position: absolute;
+    width: 360px;
+    height: 24px;
+    top: 0px;
+    margin-bottom: 10px;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    cursor: default;
+  }
+
+  /* ログイン入力フォームの指定 */
+  input[type="email"],
+  input[type="password"]{
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 10px;
+    top: 50px;
+    width: 300px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000000;
+    transition: all 1s;
+    background: none;
+
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .login-button {
+    position: relative;
+    margin-bottom: 5px;
+    margin: 12px 0px 22px 0px;
+    top: 40px;
+    padding: 0;
+    background: #C1005D;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius:5px;
+    width: 300px;
+    height: 40px;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    transition: all 0.3s;
+  }
+  .login-button:hover {
+    background-color: #870041;
+  }
+
+  .sign-up {
+    position: relative;
+    display: inline-block;
+    width: 225px;
+    height: 50px;
+    top: 30px;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 200%;
+    text-align: center;
+    color: #000000;
+    cursor: default;
+  }
+
+  .switch-register-mode {
+    text-decoration: none;
+    color: #C1005D;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    transition: all 0.2s;
+  }
+  .switch-register-mode:hover {
+    color: #278BFF;
+  }
+
+  .or {
+    position: relative;
+    top: 20px;
+  }
+
+  .or img {
+    width: 300px;
+    height: 8px;
+  }
+
+  /* google-ボタン指定 */
+  .google-login{ 
+    position: relative;
+    width: 300px;
+    height: 40px;
+    top: -20px;
+    /* background: #FFFFFF; */
+    border-radius: 5px;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    color: #595959;
+    transition: all 0.25s;
+  }
+  .google-login:hover{
+    background-color: #d4d4d4;
+    color: white;
+  }
+  .g-button {
+    position: relative;
+    width: 300px;
+    height: 40px;
+
+    /* margin: 70px 0px 0px 0px; */
+  }
+
+  .g-button img {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  }
+
+  /* パスワードが間違っています！
+  空のフォームがあるようですの表示 */
+  .flashes{
+    position: absolute;
+    font-family: 'BIZ UDPGothic';
+    font-style: normal;
+    color: red;
+    list-style:none;
+    padding: 0;
+    margin: 0;
+  }
+}
 
