@@ -4,12 +4,11 @@ window.onload = function() {
   const elm = document.documentElement;
   let barTop;
   let lastId = messages[messages.length-1].id;
-  let messageIM = {};
+  let messageIM = [];
 
-  messages.forEach((message,n)=>{
-    messageIM[n] = {id:message.id,mes:message.message};
+  messages.forEach(message=>{
+    messageIM.push({id:message.id,mes:message.message});
   });
-  console.log(messageIM);
   // 一定時間ごとに処理を実行
   setInterval(()=>{
 
@@ -36,9 +35,10 @@ window.onload = function() {
 
       if( responses !== false ) {
         
-        let messageIMDiff = {};
-        messageIMDiff = Object.assign(messageIM);
+        let messageIMDiff = [...messageIM];
+        let num = 0;
         console.log(messageIMDiff);
+
         responses.forEach(response=>{
 
           // メッセージ追加
@@ -82,6 +82,7 @@ window.onload = function() {
             messagesDiv.appendChild(iconDiv);
             // メッセージ
             boxDiv.classList.add("box-left");
+            messageP.classList.add("other-message-message");
             messageP.innerText = response.message;
             boxDiv.appendChild(messageP);
             // リアクションボタン
@@ -106,30 +107,34 @@ window.onload = function() {
               barTop = "False";
             }
             messageArea.appendChild(messagesDiv);
-            messageIM[messageIM.length] = {id:response.id,mes:reseponse.message};
+            messageIM.push({id:response.id,mes:response.message});
           }
           // メッセージ編集、削除用
           else {
             let idNum = -1;
-            messageIMDiff.forEach((IM, i) => {
-              console.log(IM.message);
-              if( IM.id == response.id ){
+            messageIMDiff.forEach((IMDiff,i)=>{
+              if( IMDiff.id == response.id ){
                 idNum = i;
-                if( uid != response.uid && IM.message != response.message ){
-                  const messageEdit = document.querySelector(`#other-message-${IM.id} .user-name`);
+                if( uid != response.uid && IMDiff.mes != response.message ){
+                  const messageEdit = document.querySelector(`#other-message-${IMDiff.id} .other-message-message`);
                   messageEdit.innerText = response.message;
-                  const messageTimeEdit = document.querySelector(`#other-message-${IM.id} .other-message-updatetime`);
-                  const timeEditP = document.createElement("p");
-                  timeEditP.classList.add("message-updatetime-left-edit");
-                  timeEditP.innerText = "編集:"+ response.updated_at;
-                  messageTimeEdit.appendChild(timeEditP);
+                  const messageTimeEditOld = document.querySelector(`#other-message-${IMDiff.id} .message-updatetime-left-edit`);
+                  if( messageTimeEditOld ){
+                    messageTimeEditOld.innerText = "編集:"+ response.updated_at;
+                  } else {
+                    const messageTimeEdit = document.querySelector(`#other-message-${IMDiff.id} .other-message-updatetime`);
+                    const timeEditP = document.createElement("p");
+                    timeEditP.classList.add("message-updatetime-left-edit");
+                    timeEditP.innerText = "編集:"+ response.updated_at;
+                    messageTimeEdit.appendChild(timeEditP);
+                  }
+                  messageIM[num].mes = response.message;
                 }
               }
             });
-            console.log(idNum);
             messageIMDiff.splice(idNum, 1);
-            console.log(messageIMDiff);
           }
+          num++;
         });
         // 最後のid更新
         if( lastId < responses[responses.length-1].id ){
@@ -138,7 +143,7 @@ window.onload = function() {
         // メッセージ削除
         if( messageIMDiff ){
           for(let j=0;j<messageIMDiff.length;j++){
-            document.getElementById(`other-message-${messageIMDiff[j]}`).style.display = "none";
+            document.getElementById(`other-message-${messageIMDiff[j].id}`).style.display = "none";
             messageIM.splice(messageIMDiff.indexOf(messageIMDiff[j],1));
           }
         }

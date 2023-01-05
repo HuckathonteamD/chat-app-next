@@ -25,7 +25,7 @@
       <ul>
         <li class="logo1"><img src="{{url_for('static', filename='img/Channel-chatIcon.png')}}" alt="icon"></li> <!-- ロゴ -->
         <li class="logo2"><img src="{{url_for('static', filename='img/Channel-Ring.png')}}" alt="ring"></li> <!-- ロゴ -->
-        <li class="home"><a href="{{ url_for('index', status='active') }}"><img src="{{url_for('static', filename='img/Home-White.png')}}" alt="home"></a></li> <!-- チャンネル一覧へ遷移 -->
+        <li class="home"><a href="{{ url_for('index') }}"><img src="{{url_for('static', filename='img/Home-White.png')}}" alt="home"></a></li> <!-- チャンネル一覧へ遷移 -->
         <li class="mypage"><a href="{{ url_for('my_page') }}"><img src="{{url_for('static', filename='img/myPage-White.png')}}" alt="mypage"></a></li> <!-- Mypageへ -->
         <li class="logout" id="logout-btn"><img src="{{url_for('static', filename='img/Logout-White.png')}}" alt="logout"></li> <!-- ログアウト -->
     </ul>
@@ -121,8 +121,8 @@
             </div>
             <!-- ユーザアイコン表示ここまで -->
 
-            <div class="box box-right">
-              <p>{{ message.message.replace("\r\n","<br>").replace("\n","<br>") | safe }}</p> <!-- UIにメッセージ内容表示 -->
+            <div class="box-right">
+              <p class="my-message-message">{{ message.message.replace("\r\n","<br>").replace("\n","<br>") | safe }}</p> <!-- UIにメッセージ内容表示 -->
               <!-- リアクション表示 -->
               <div class="reacions">
               {% if messages_reaction %}
@@ -172,8 +172,8 @@
               </div>
             <!-- 他人のユーザアイコン表示ここまで -->              
 
-            <div class="box box-left">
-              <p>{{ message.message.replace("\r\n","<br>").replace("\n","<br>") | safe }}</p> <!-- UIにメッセージ内容表示 -->
+            <div class="box-left">
+              <p class="other-message-message">{{ message.message.replace("\r\n","<br>").replace("\n","<br>") | safe }}</p> <!-- UIにメッセージ内容表示 -->
               <!-- リアクション表示 -->
               <div class="reacions">
               {% if messages_reaction %}

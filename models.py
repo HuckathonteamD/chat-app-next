@@ -247,6 +247,7 @@ class dbConnect:
         finally:
             cur.close()
 
+
     def userDeactivate(uid):
         try:
             conn = DB.getConnection()
@@ -254,6 +255,21 @@ class dbConnect:
             sql = "UPDATE user_follow_channel SET status='inactive' WHERE uid=%s;"
             cur.execute(sql, (uid))
             conn.commit()
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close()
+
+
+    def checkUserStatus(uid):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT status FROM user_follow_channel WHERE uid=%s AND status='active';"
+            cur.execute(sql, (uid))
+            status = cur.fetchall()
+            return status
         except Exception as e:
             print(e + 'が発生しています')
             return None
