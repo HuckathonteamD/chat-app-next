@@ -4,12 +4,11 @@ window.onload = function() {
   const elm = document.documentElement;
   let barTop;
   let lastId = messages[messages.length-1].id;
-  let messageId = [];
+  let messageIM = [];
 
   messages.forEach(message=>{
-    messageId.push(message.id);
+    messageIM.push({id:message.id,mes:message.message});
   });
-
   // 一定時間ごとに処理を実行
   setInterval(()=>{
 
@@ -36,7 +35,9 @@ window.onload = function() {
 
       if( responses !== false ) {
         
-        let messageIdDiff = messageId.map(x=>x);
+        let messageIMDiff = [...messageIM];
+        let num = 0;
+
         responses.forEach(response=>{
 
           // メッセージ追加
@@ -80,6 +81,7 @@ window.onload = function() {
             messagesDiv.appendChild(iconDiv);
             // メッセージ
             boxDiv.classList.add("box-left");
+            messageP.classList.add("other-message-message");
             messageP.innerText = response.message;
             boxDiv.appendChild(messageP);
             // リアクションボタン
@@ -104,23 +106,44 @@ window.onload = function() {
               barTop = "False";
             }
             messageArea.appendChild(messagesDiv);
-            messageId.push(response.id);
+            messageIM.push({id:response.id,mes:response.message});
           }
-          // メッセージ削除用
+          // メッセージ編集、削除用
           else {
-            let idNum = messageIdDiff.indexOf(response.id);
-            messageIdDiff.splice(idNum, 1);
+            let idNum = -1;
+            messageIMDiff.forEach((IMDiff,i)=>{
+              if( IMDiff.id == response.id ){
+                idNum = i;
+                if( uid != response.uid && IMDiff.mes != response.message ){
+                  const messageEdit = document.querySelector(`#other-message-${IMDiff.id} .other-message-message`);
+                  messageEdit.innerText = response.message;
+                  const messageTimeEditOld = document.querySelector(`#other-message-${IMDiff.id} .message-updatetime-left-edit`);
+                  if( messageTimeEditOld ){
+                    messageTimeEditOld.innerText = "編集:"+ response.updated_at;
+                  } else {
+                    const messageTimeEdit = document.querySelector(`#other-message-${IMDiff.id} .other-message-updatetime`);
+                    const timeEditP = document.createElement("p");
+                    timeEditP.classList.add("message-updatetime-left-edit");
+                    timeEditP.innerText = "編集:"+ response.updated_at;
+                    messageTimeEdit.appendChild(timeEditP);
+                  }
+                  messageIM[num].mes = response.message;
+                }
+              }
+            });
+            messageIMDiff.splice(idNum, 1);
           }
+          num++;
         });
         // 最後のid更新
         if( lastId < responses[responses.length-1].id ){
           lastId = responses[responses.length-1].id;
         }
         // メッセージ削除
-        if( messageIdDiff ){
-          for(let j=0;j<messageIdDiff.length;j++){
-            document.getElementById(`other-message-${messageIdDiff[j]}`).style.display = "none";
-            messageId.splice(messageIdDiff.indexOf(messageIdDiff[j],1));
+        if( messageIMDiff ){
+          for(let j=0;j<messageIMDiff.length;j++){
+            document.getElementById(`other-message-${messageIMDiff[j].id}`).style.display = "none";
+            messageIM.splice(messageIMDiff.indexOf(messageIMDiff[j],1));
           }
         }
         // スクロール

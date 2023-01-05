@@ -1,7 +1,7 @@
 from flask import Flask, flash, redirect, render_template, url_for, request, session
 from models import dbConnect
 from util.user import User
-from util.crypto_dec import crypto_dec #デプロイ後使用
+from util.crypto_dec import crypto_dec #デプロイ環境で使用
 from datetime import datetime, timedelta, timezone
 import hashlib
 import uuid
@@ -99,13 +99,16 @@ def logout():
 @app.route('/')
 def index():
     uid = session.get("uid")
-    req = request.args
-    status = req.get("status")
-    if status == 'active':
-        dbConnect.userDeactivate(uid)
+    # req = request.args
+    # status = req.get("status")
+    # if status == 'active':
+    #     dbConnect.userDeactivate(uid)
     if uid is None:
         return redirect('/login')
     else:
+        status = dbConnect.checkUserStatus(uid)
+        if status:
+            dbConnect.userDeactivate(uid)
         channels = dbConnect.getChannelAll()
         follow_channels = dbConnect.getFollowChannelIdByUid(uid)
         return render_template('index.html', channels=channels, uid=uid, follow_channels=follow_channels)
@@ -286,10 +289,13 @@ def unfollow_channel_i(cid):
 @app.route('/my_page')
 def my_page():
     uid = session.get("uid")
-    dbConnect.userDeactivate(uid)
+    # dbConnect.userDeactivate(uid)
     if uid is None:
         return redirect ('/login')
     else:
+        status = dbConnect.checkUserStatus(uid)
+        if status:
+            dbConnect.userDeactivate(uid)
         name = dbConnect.getUserName(uid)
         if name is None:
             flash('マイページは本人のみ閲覧可能です')
@@ -468,14 +474,6 @@ def show_error500(error):
 @app.route('/google_login')
 def google_login():
     return render_template('registration/google-login.html')
-
-
-# @app.before_request
-# def before_request():
-#     if not request.is_secure:
-#         url = request.url.replace('http://', 'https://', 1)
-#         code = 301
-#         return redirect(url, code=code)
 
 
 if __name__ == '__main__':
