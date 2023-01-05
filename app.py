@@ -290,12 +290,12 @@ def unfollow_channel_i(cid):
 def my_page():
     uid = session.get("uid")
     # dbConnect.userDeactivate(uid)
-    status = dbConnect.checkUserStatus(uid)
-    if status:
-        dbConnect.userDeactivate(uid)
     if uid is None:
         return redirect ('/login')
     else:
+        status = dbConnect.checkUserStatus(uid)
+        if status:
+            dbConnect.userDeactivate(uid)
         name = dbConnect.getUserName(uid)
         if name is None:
             flash('マイページは本人のみ閲覧可能です')
