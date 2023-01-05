@@ -37,7 +37,6 @@ window.onload = function() {
         
         let messageIMDiff = [...messageIM];
         let num = 0;
-        console.log(messageIMDiff);
 
         responses.forEach(response=>{
 
